@@ -1,0 +1,61 @@
+/* Importa o tema pronto do Angular Material (paleta azul, combina com as cores usadas nos componentes) */
+@use '@angular/material/prebuilt-themes/azure-blue.css';
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Utilitários globais */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.page-header {
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: #1a237e;
+  }
+
+  p {
+    color: #666;
+    margin-top: 4px;
+  }
+}
+
+.mat-mdc-card {
+  border-radius: 8px !important;
+}
+
+.form-field-full {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.chip-aberta { background-color: #e8f5e9 !important; color: #2e7d32 !important; }
+.chip-preenchida { background-color: #e3f2fd !important; color: #1565c0 !important; }
+.chip-cancelada { background-color: #fce4ec !important; color: #c62828 !important; }
+.chip-pendente { background-color: #fff8e1 !important; color: #f57f17 !important; }
+.chip-aceito { background-color: #e8f5e9 !important; color: #2e7d32 !important; }
+.chip-recusado { background-color: #fce4ec !important; color: #c62828 !important; }
