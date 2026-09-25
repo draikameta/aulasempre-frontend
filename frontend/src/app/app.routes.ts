@@ -1,19 +1,39 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth.guard';
+import { escolaGuard, professorGuard } from './core/guards/auth.guard';
 
-// Rotas do Incremento 2. As rotas de escola/dashboard e professor/dashboard
-// (com os guards escolaGuard/professorGuard) entram nos Incrementos 3 e 4,
-// junto com as telas correspondentes.
+// Rotas até o Incremento 3 (jornada principal completa: escola cria pedido,
+// vê professores compatíveis, convida; professor vê e responde convites).
+// Perfil do professor, substituições e avaliação entram nos incrementos seguintes.
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
     path: 'login',
     loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent)
   },
+
+  // ===== Escola =====
   {
-    path: 'home',
-    canActivate: [authGuard],
-    loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent)
+    path: 'escola/dashboard',
+    canActivate: [escolaGuard],
+    loadComponent: () => import('./features/escola/dashboard/dashboard.component').then(m => m.EscolaDashboardComponent)
   },
+  {
+    path: 'escola/solicitacoes/nova',
+    canActivate: [escolaGuard],
+    loadComponent: () => import('./features/escola/nova-solicitacao/nova-solicitacao.component').then(m => m.NovaSolicitacaoComponent)
+  },
+  {
+    path: 'escola/solicitacoes/:id/professores',
+    canActivate: [escolaGuard],
+    loadComponent: () => import('./features/escola/professores/professores.component').then(m => m.ProfessoresCompativeisComponent)
+  },
+
+  // ===== Professor =====
+  {
+    path: 'professor/convites',
+    canActivate: [professorGuard],
+    loadComponent: () => import('./features/professor/convites/convites.component').then(m => m.ConvitesComponent)
+  },
+
   { path: '**', redirectTo: '/login' }
 ];

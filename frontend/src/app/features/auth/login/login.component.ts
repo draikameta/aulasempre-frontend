@@ -116,9 +116,16 @@ export class LoginComponent {
     this.authService.login(this.form.value).subscribe({
       next: () => {
         this.carregando = false;
-        // Dashboards por papel chegam nos Incrementos 3 e 4; por enquanto
-        // login e professor/escola caem na mesma tela provisória.
-        this.router.navigate(['/home']);
+        const papel = this.authService.papel();
+        if (papel === 'ESCOLA') {
+          this.router.navigate(['/escola/dashboard']);
+        } else if (papel === 'PROFESSOR') {
+          this.router.navigate(['/professor/convites']);
+        } else {
+          // Não deveria acontecer, mas evita tela em branco se o papel não
+          // vier reconhecido (ver bloqueio sobre o formato da resposta do login).
+          this.erro = 'Login feito, mas não foi possível identificar seu papel (escola/professor).';
+        }
       },
       error: err => {
         this.carregando = false;

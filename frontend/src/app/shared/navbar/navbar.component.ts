@@ -21,8 +21,14 @@ import { CommonModule } from '@angular/common';
       @if (auth.isLoggedIn()) {
         <span class="usuario-nome">{{ auth.nomeUsuario() }}</span>
 
-        <!-- Links por papel (escola/professor) chegam nos Incrementos 3 e 4 -->
-        <a mat-button routerLink="/home">Início</a>
+        @if (auth.papel() === 'ESCOLA') {
+          <a mat-button routerLink="/escola/dashboard">Dashboard</a>
+          <a mat-button routerLink="/escola/solicitacoes/nova">Nova Solicitação</a>
+        }
+
+        @if (auth.papel() === 'PROFESSOR') {
+          <a mat-button routerLink="/professor/convites">Convites</a>
+        }
 
         <button mat-icon-button (click)="auth.logout()" title="Sair">
           <mat-icon>logout</mat-icon>
